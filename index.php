@@ -82,7 +82,7 @@
 
 //connection
 $connect = mysql_connect('localhost','root','root');
-if($connect) echo "connected <br>";
+if($connect) echo "connected YEA! <br>";
 else echo "no connection";
 
 mysql_select_db('is218');
