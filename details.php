@@ -21,47 +21,44 @@
     overflow: scroll;">	
 <table class="table table-hover">
 <tbody>
-<tr class='header'>
+
 
 <?php 
-
-// table headers
-$x = 'SELECT * FROM headers';
-	$statement = $db->prepare($x);
-	$statement->execute();
-
-//generate html from query
-foreach ($statement->fetchAll() as $row) {
-	echo "<td>" . $row[0] . "</td>";
-}
-
-echo"</tr>";
-echo"<tr>";
-
-
 
 
 // check if request is get request
 if($_SERVER['REQUEST_METHOD'] == 'GET'){
 	if(!empty($_GET)){
 
+		// table headers
+		$x = 'SELECT * FROM headers';
+		//prepare
+		$headerStatement = $db->prepare($x);
+		//execute
+		$headerStatement->execute();
+		//fetch and store
+		$data = $headerStatement->fetchAll();
+
 		//store school id
 		$id = $_GET['id'];
 
-		//form the query
+		//id query
 		$q = 'SELECT * FROM sampleData
           WHERE UNITID = :id';
 			$statement = $db->prepare($q);
 			$statement->bindValue(':id', $id);
 			$statement->execute();
 
-			//generate html from query
-			foreach ($statement->fetchAll() as $row) {
-				for ($i=0; $i < 66; $i++) { 
-					echo "<td>" . $row[$i] . "</td>";
-					# code...
-				}
+		//generate html from query
+		foreach ($statement->fetchAll() as $row) {
+			for ($i=0; $i < 66; $i++) { 
+				echo "<tr>";
+				echo "<td>" . $data[$i][0] . "</td>";
+				echo "<td>" . $row[$i] . "</td>";
+				echo "</tr>";
+				# code...
 			}
+		}
 
 	}
 	//if no get data
@@ -69,10 +66,31 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
 }
 
 ?>
-</tr>
 </tbody>
 </table>
 </div>
 </div>
 
 <?php require('includes/footer.html') ?>
+
+<table>
+    <tbody>
+        <tr>
+            <td>$key</td>
+            <td>value</td>
+        </tr>
+        <tr>
+            <td>$key</td>
+            <td>value</td>
+        </tr>
+        <tr>
+            <td>$key</td>
+            <td>value</td>
+        </tr>
+        <tr>
+            <td>$key</td>
+            <td>value</td>
+        </tr>
+
+    </tbody>
+</table>
