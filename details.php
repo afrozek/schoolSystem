@@ -72,25 +72,3 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
 </div>
 
 <?php require('includes/footer.html') ?>
-
-<table>
-    <tbody>
-        <tr>
-            <td>$key</td>
-            <td>value</td>
-        </tr>
-        <tr>
-            <td>$key</td>
-            <td>value</td>
-        </tr>
-        <tr>
-            <td>$key</td>
-            <td>value</td>
-        </tr>
-        <tr>
-            <td>$key</td>
-            <td>value</td>
-        </tr>
-
-    </tbody>
-</table>
