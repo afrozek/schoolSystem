@@ -1,8 +1,8 @@
 <!-- get connection -->
-<?php require('connect.php') ?>
+<?php require('config/connect.php') ?>
 
 <!-- get header -->
-<?php require('head.html') ?>
+<?php require('includes/head.html') ?>
 
 <body>
 <div class="container well margin-top">
@@ -75,4 +75,4 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
 </div>
 </div>
 
-<?php require('footer.html') ?>
+<?php require('includes/footer.html') ?>
