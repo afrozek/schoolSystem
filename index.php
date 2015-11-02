@@ -1,4 +1,4 @@
-<!-- get c -->
+<!-- get connection -->
 <?php require('config/connect.php') ?>
 
 <!-- get header -->
