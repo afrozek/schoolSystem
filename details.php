@@ -1,14 +1,9 @@
+<!-- get connection -->
+<?php require('connect.php') ?>
 
-<html>
-<head>
-	<title></title>
-<style type="text/css">
-	
-</style>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
-	<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" type="text/css" href="main.css">
-</head>
+<!-- get header -->
+<?php require('head.html') ?>
+
 <body>
 <div class="container well margin-top">
 
@@ -29,53 +24,55 @@
 <tr class='header'>
 
 <?php 
-//connection
-$connect = mysql_connect('localhost','root','root');
- mysql_select_db('is218');
 
-		$x = mysql_query("SELECT * FROM headers ");
-			while($row = mysql_fetch_array($x)){		
-				echo "<td>" . $row[0] . "</td>";
-		}
+// table headers
+$x = 'SELECT * FROM headers';
+	$statement = $db->prepare($x);
+	$statement->execute();
 
- echo"</tr>";
+//generate html from query
+foreach ($statement->fetchAll() as $row) {
+	echo "<td>" . $row[0] . "</td>";
+}
+
+echo"</tr>";
 echo"<tr>";
 
 
 
 
-
+// check if request is get request
 if($_SERVER['REQUEST_METHOD'] == 'GET'){
 	if(!empty($_GET)){
-		//echo($_GET['id']);
 
+		//store school id
 		$id = $_GET['id'];
 
+		//form the query
+		$q = 'SELECT * FROM sampleData
+          WHERE UNITID = :id';
+			$statement = $db->prepare($q);
+			$statement->bindValue(':id', $id);
+			$statement->execute();
 
-		$q = mysql_query("SELECT * FROM sampleData WHERE UNITID = $id ");
-			while($row = mysql_fetch_array($q)){
-			
-	
+			//generate html from query
+			foreach ($statement->fetchAll() as $row) {
 				for ($i=0; $i < 66; $i++) { 
 					echo "<td>" . $row[$i] . "</td>";
 					# code...
 				}
-		}
-
+			}
 
 	}
-	else echo"no get data";
+	//if no get data
+	else echo"no GET data passed";
 }
 
 ?>
 </tr>
 </tbody>
 </table>
+</div>
+</div>
 
-</div>
-</div>
-<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
-</body>
-</html>
+<?php require('footer.html') ?>

@@ -1,15 +1,9 @@
-<html>
-<head>
-	<title></title>
-<style type="text/css">
-	
-</style>
-	
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
-	<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" type="text/css" href="main.css">
-</head>
+<!-- get c -->
+<?php require('connect.php') ?>
+
+<!-- get header -->
+<?php require('head.html') ?>
+
 <body>
 <div class="container well margin-top">
 
@@ -25,36 +19,27 @@
   <div class="panel-heading">Universities by name</div>
   <div class="panel-body">
 
+<?php   
 
-<?php 
+//query
+$q = 'SELECT UNITID,INSTNM FROM sampleData';
+$statement = $db->prepare($q);
+$statement->execute();
 
-//connection
-$connect = mysql_connect('localhost','root','root');
-if($connect);
-else echo "no connection";
-
-mysql_select_db('is218');
-
-$q = mysql_query("SELECT UNITID,INSTNM FROM sampleData");
-
+//table start
 echo "<table class='table table-hover'>";
 
-while($row = mysql_fetch_array($q)){
+//generate html from query
+foreach ($statement->fetchAll() as $row) {
 	$id = $row[0];
 	$school = $row[1];
 	print( "<tr><td><a href='details.php?id=" . $id  ."'>". $school ."</a></td></tr>");
-
 }
 
-
-
- ?>
+?>
 </table>
- </div>
- </div>
- <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
-</body>
-</html>
+</div>
+</div>
+
+<?php require('footer.html') ?>
 
