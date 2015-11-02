@@ -1,0 +1,25 @@
+body{
+	background-color: #337ab7;
+	background: url('https://insoftd.com/wp-content/uploads/2015/05/blurred-background-10.jpg');
+	font-family: lato, helvetica, 'sans-serif';
+	background-position: center;
+	background-attachment: fixed;
+
+}
+
+.margin-top{
+	margin-top: 50px;
+}
+
+.jumbotron{
+	background: url(http://previews.123rf.com/images/mike301/mike3010812/mike301081200084/40630…ates-of-America-in-colors-of-the-rainbow-as-a-vector-file-Stock-Vector.jpg);
+    background-position: 621px;
+    background-size: 36%;
+    background-repeat: no-repeat;
+}
+
+tr.header{
+
+	font-weight: bold;
+}
+
