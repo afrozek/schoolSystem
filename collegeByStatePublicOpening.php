@@ -18,30 +18,23 @@
 		<p>--Afroze Khan</p>
 	</div>
 </div>
+
+
+
 <div class="panel panel-primary">
   <!-- Default panel contents -->
-  <div class="panel-heading">Universities by name</div>
+  <div class="panel-heading">Universities With Public Openings </div>
   <div class="panel-body">
 
 <?php   
 
 //query
-$q = 'SELECT UNITID,INSTNM FROM sampleData';
-$statement = $db->prepare($q);
-$statement->execute();
 
-//table start
-echo "<table class='table table-hover'>";
-
-//generate html from query
-foreach ($statement->fetchAll() as $row) {
-	$id = $row[0];
-	$school = $row[1];
-	print( "<tr><td><a href='details.php?id=" . $id  ."'>". $school ."</a></td></tr>");
-}
+	//call CollegeManager Object
+	$cm->byStatePublicOpening($db);
 
 ?>
-</table>
+
 </div>
 </div>
 

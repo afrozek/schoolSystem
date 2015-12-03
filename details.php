@@ -5,6 +5,10 @@
 <?php require('includes/head.html') ?>
 
 <body>
+
+<!-- get nav -->
+<?php require('includes/nav.html') ?>
+	
 <div class="container well margin-top">
 
 <div class="jumbotron">
@@ -30,44 +34,18 @@
 if($_SERVER['REQUEST_METHOD'] == 'GET'){
 	if(!empty($_GET)){
 
-		// table headers
-		$x = 'SELECT * FROM headers';
-		//prepare
-		$headerStatement = $db->prepare($x);
-		//execute
-		$headerStatement->execute();
-		//fetch and store
-		$data = $headerStatement->fetchAll();
-
 		//store school id
 		$id = $_GET['id'];
 
-		//id query
-		$q = 'SELECT * FROM sampleData
-          WHERE UNITID = :id';
-			$statement = $db->prepare($q);
-			$statement->bindValue(':id', $id);
-			$statement->execute();
-
-		//generate html from query
-		foreach ($statement->fetchAll() as $row) {
-			for ($i=0; $i < 66; $i++) { 
-				echo "<tr>";
-				echo "<td>" . $data[$i][0] . "</td>";
-				echo "<td>" . $row[$i] . "</td>";
-				echo "</tr>";
-				# code...
-			}
-		}
-
+		//call CollegeManager Object
+		$cm->getDetails($id,$db);
 	}
 	//if no get data
 	else echo"no GET data passed";
 }
 
 ?>
-</tbody>
-</table>
+
 </div>
 </div>
 

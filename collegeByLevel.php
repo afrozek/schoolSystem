@@ -18,6 +18,18 @@
 		<p>--Afroze Khan</p>
 	</div>
 </div>
+
+<div class="form-group">
+	<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="GET">
+		<select class="form-control" name="level">
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+		</select>
+		<button type="submit" class="btn btn-default btn-block">Submit</button>
+	</form>
+</div>
+
 <div class="panel panel-primary">
   <!-- Default panel contents -->
   <div class="panel-heading">Universities by name</div>
@@ -26,22 +38,18 @@
 <?php   
 
 //query
-$q = 'SELECT UNITID,INSTNM FROM sampleData';
-$statement = $db->prepare($q);
-$statement->execute();
 
-//table start
-echo "<table class='table table-hover'>";
+if(empty($_GET['level'])){
+	$q = 'SELECT UNITID,INSTNM FROM sampleData';
+}
+else{
+	$level = $_GET['level'];
+	$cm->byLevel($level,$db);
 
-//generate html from query
-foreach ($statement->fetchAll() as $row) {
-	$id = $row[0];
-	$school = $row[1];
-	print( "<tr><td><a href='details.php?id=" . $id  ."'>". $school ."</a></td></tr>");
 }
 
 ?>
-</table>
+
 </div>
 </div>
 
