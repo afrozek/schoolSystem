@@ -230,7 +230,7 @@ class CollegeManager
 
 	 public function byNearestLocation($db)
 	    {
-	    	$q = "SELECT UNITID,INSTNM, ( 3959 * acos( cos( radians(40) ) * cos( radians( LATITUDE ) ) * cos( radians( LONGITUD ) - radians(74) ) + sin( radians(40) ) * sin( radians( LATITUDE ) ) ) ) AS distance FROM sampleData";
+	    	$q = "SELECT UNITID,INSTNM, ( 3959 * acos( cos( radians(40) ) * cos( radians( LATITUDE ) ) * cos( radians( LONGITUD ) - radians(74) ) + sin( radians(40) ) * sin( radians( LATITUDE ) ) ) ) AS distance FROM sampleData ORDER BY distance LIMIT 0 , 20";
 
 	    	//$q = "SELECT UNITID,INSTNM,HOSPITAL FROM sampleData WHERE HOSPITAL = 1 AND MEDICAL = 2 OR MEDICAL = -2 OR MEDICAL = -1 ";
 
@@ -247,7 +247,7 @@ class CollegeManager
 				
 				
 
-				print( "<tr><td><a href='details.php?id=" . $id  ."'>". $INSTNM ." | Distance : " .$row['distance']  . " Miles </a></td></tr>");
+				print( "<tr><td><a href='details.php?id=" . $id  ."'>". $INSTNM . " Miles </a></td><td>Distance : " .$row['distance']  . " Miles</td></tr>");
 			}
 
 			print '</table>' ;
