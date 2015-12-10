@@ -88,7 +88,7 @@
 //query
 
 if(empty($_GET['state'])){
-	$q = 'SELECT UNITID,INSTNM FROM sampleData';
+	$q = 'SELECT UNITID,INSTNM FROM colleges';
 }
 else{
 	$state = $_GET['state'];

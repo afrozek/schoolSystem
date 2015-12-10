@@ -80,7 +80,7 @@
 
 <div class="panel panel-primary">
   <!-- Default panel contents -->
-  <div class="panel-heading">Universities by name</div>
+  <div class="panel-heading">Universities by State</div>
   <div class="panel-body">
 
 <?php   
@@ -88,7 +88,7 @@
 //query
 
 if(empty($_GET['state'])){
-	$q = 'SELECT UNITID,INSTNM FROM sampleData';
+	$q = 'SELECT UNITID,INSTNM FROM colleges';
 }
 else{
 	$state = $_GET['state'];

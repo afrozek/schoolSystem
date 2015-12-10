@@ -25,7 +25,7 @@ class CollegeManager
 		
 
 		//id query
-		$q = 'SELECT * FROM sampleData
+		$q = 'SELECT * FROM colleges
           WHERE UNITID = :id';
 			$statement = $db->prepare($q);
 			$statement->bindValue(':id', $id);
@@ -54,7 +54,7 @@ class CollegeManager
     public function byState($state,$db)
     {
 
-    	$q = "SELECT UNITID,INSTNM FROM sampleData WHERE STABBR = '$state' ";
+    	$q = "SELECT UNITID,INSTNM FROM colleges WHERE STABBR = '$state' ";
 
 		$statement = $db->prepare($q);
 		$statement->execute();
@@ -77,7 +77,7 @@ class CollegeManager
     public function byLevel($level,$db)
     {
 
-    	$q = "SELECT UNITID,INSTNM FROM sampleData WHERE ICLEVEL = '$level' ";
+    	$q = "SELECT UNITID,INSTNM FROM colleges WHERE ICLEVEL = '$level' ";
 
 
 		$statement = $db->prepare($q);
@@ -100,7 +100,7 @@ class CollegeManager
     public function byHospital($state,$db)
     {
 
-    	$q = "SELECT UNITID,INSTNM,HOSPITAL FROM sampleData WHERE STABBR = '$state' AND HOSPITAL = 1 ";
+    	$q = "SELECT UNITID,INSTNM,HOSPITAL FROM colleges WHERE STABBR = '$state' AND HOSPITAL = 1 ";
 
 
 		$statement = $db->prepare($q);
@@ -148,7 +148,7 @@ class CollegeManager
     public function byHospitalNonDegree($db)
     {
 
-    	$q = "SELECT UNITID,INSTNM,HOSPITAL FROM sampleData WHERE HOSPITAL = 1 AND MEDICAL = 2 OR MEDICAL = -2 OR MEDICAL = -1 ";
+    	$q = "SELECT UNITID,INSTNM,HOSPITAL FROM colleges WHERE HOSPITAL = 1 AND MEDICAL = 2 OR MEDICAL = -2 OR MEDICAL = -1 ";
 
 		$statement = $db->prepare($q);
 		$statement->execute();
@@ -173,7 +173,7 @@ class CollegeManager
     public function byStatePublicOpening($db)
     {
 
-    	$q = "SELECT STABBR,UNITID,INSTNM,OPENPUBL FROM sampleData WHERE OPENPUBL = 1 ";
+    	$q = "SELECT STABBR,UNITID,INSTNM,OPENPUBL FROM colleges WHERE OPENPUBL = 1 ";
 
 		$statement = $db->prepare($q);
 		$statement->execute();
@@ -230,9 +230,12 @@ class CollegeManager
 
 	 public function byNearestLocation($db)
 	    {
-	    	$q = "SELECT UNITID,INSTNM, ( 3959 * acos( cos( radians(40) ) * cos( radians( LATITUDE ) ) * cos( radians( LONGITUD ) - radians(74) ) + sin( radians(40) ) * sin( radians( LATITUDE ) ) ) ) AS distance FROM sampleData ORDER BY distance LIMIT 0 , 20";
 
-	    	//$q = "SELECT UNITID,INSTNM,HOSPITAL FROM sampleData WHERE HOSPITAL = 1 AND MEDICAL = 2 OR MEDICAL = -2 OR MEDICAL = -1 ";
+	    	//$q = "SELECT UNITIT, INSTNM, SQRT(POW((69.1 * (colleges.latitude - 40.7431473)) , 2 ) + POW((53 * (colleges.longitud - -74.1783086)), 2)) AS distance FROM colleges ORDER BY distance ASC LIMIT 20";
+
+	    	$q = "SELECT UNITID,INSTNM, ( 3959 * acos( cos( radians(40) ) * cos( radians( LATITUDE ) ) * cos( radians( LONGITUD ) - radians(-74) ) + sin( radians(40) ) * sin( radians( LATITUDE ) ) ) ) AS distance FROM colleges WHERE LATITUDE != 'null' AND LONGITUD != 'null'   ORDER BY distance LIMIT 0 , 20";
+
+	    	//$q = "SELECT UNITID,INSTNM,HOSPITAL FROM colleges WHERE HOSPITAL = 1 AND MEDICAL = 2 OR MEDICAL = -2 OR MEDICAL = -1 ";
 
 			$statement = $db->prepare($q);
 			$statement->execute();
@@ -247,7 +250,7 @@ class CollegeManager
 				
 				
 
-				print( "<tr><td><a href='details.php?id=" . $id  ."'>". $INSTNM . " Miles </a></td><td>Distance : " .$row['distance']  . " Miles</td></tr>");
+				print( "<tr><td><a href='details.php?id=" . $id  ."'>". $INSTNM . " </a></td><td>Distance : " .$row['distance']  . " Miles</td></tr>");
 			}
 
 			print '</table>' ;

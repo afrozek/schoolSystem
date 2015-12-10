@@ -26,7 +26,7 @@
 <?php   
 
 //query
-$q = 'SELECT UNITID,INSTNM FROM sampleData';
+$q = 'SELECT UNITID,INSTNM FROM colleges';
 $statement = $db->prepare($q);
 $statement->execute();
 

@@ -32,7 +32,7 @@
 
 <div class="panel panel-primary">
   <!-- Default panel contents -->
-  <div class="panel-heading">Universities by name</div>
+  <div class="panel-heading">Universities by Level</div>
   <div class="panel-body">
 
 <?php   
@@ -40,7 +40,7 @@
 //query
 
 if(empty($_GET['level'])){
-	$q = 'SELECT UNITID,INSTNM FROM sampleData';
+	$q = 'SELECT UNITID,INSTNM FROM colleges';
 }
 else{
 	$level = $_GET['level'];
