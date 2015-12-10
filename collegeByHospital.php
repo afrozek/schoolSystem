@@ -80,7 +80,7 @@
 
 <div class="panel panel-primary">
   <!-- Default panel contents -->
-  <div class="panel-heading">Universities by name</div>
+  <div class="panel-heading">Universities by Hospital</div>
   <div class="panel-body">
 
 <?php   

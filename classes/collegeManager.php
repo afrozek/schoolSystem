@@ -100,7 +100,7 @@ class CollegeManager
     public function byHospital($state,$db)
     {
 
-    	$q = "SELECT UNITID,INSTNM,HOSPITAL FROM sampleData WHERE STABBR = '$state' ";
+    	$q = "SELECT UNITID,INSTNM,HOSPITAL FROM sampleData WHERE STABBR = '$state' AND HOSPITAL = 1 ";
 
 
 		$statement = $db->prepare($q);
@@ -213,6 +213,35 @@ class CollegeManager
 		print '</table>' ;
 
     }//end byStatePublicOpening
+
+
+	 public function byNearestLocation($db)
+	    {
+	    	$q = "SELECT UNITID,INSTNM, ( 3959 * acos( cos( radians(40) ) * cos( radians( LATITUDE ) ) * cos( radians( LONGITUD ) - radians(74) ) + sin( radians(40) ) * sin( radians( LATITUDE ) ) ) ) AS distance FROM sampleData";
+
+	    	//$q = "SELECT UNITID,INSTNM,HOSPITAL FROM sampleData WHERE HOSPITAL = 1 AND MEDICAL = 2 OR MEDICAL = -2 OR MEDICAL = -1 ";
+
+			$statement = $db->prepare($q);
+			$statement->execute();
+
+			//table start
+			echo "<table class='table table-hover'>";
+
+			//generate html from query
+			foreach ($statement->fetchAll() as $row) {
+				$id = $row['UNITID'];
+				$INSTNM = $row['INSTNM'];
+				
+				
+
+				print( "<tr><td><a href='details.php?id=" . $id  ."'>". $INSTNM ." | Distance : " .$row['distance']  . " Miles </a></td></tr>");
+			}
+
+			print '</table>' ;
+
+	    }//end byNearestLocation
+
+
 
 
 
