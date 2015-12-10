@@ -208,7 +208,20 @@ class CollegeManager
 		}
 
 		arsort($states);
-		print_r($states);
+		//print_r($states);
+
+		foreach ($states as $state => $openings) {
+			$q = "SELECT StateName, StateAbbrev FROM states WHERE StateAbbrev = '$state' ";
+			$statement = $db->prepare($q);
+			$statement->execute();
+
+			foreach ($statement->fetchAll() as $row) {
+			$state = $row[0];
+			}
+
+			# code...
+			print("<tr><td>" . $state . " has ". $openings . " openings</td></tr>");
+		}
 		
 		print '</table>' ;
 

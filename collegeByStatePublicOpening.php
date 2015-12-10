@@ -23,7 +23,7 @@
 
 <div class="panel panel-primary">
   <!-- Default panel contents -->
-  <div class="panel-heading">Universities With Public Openings </div>
+  <div class="panel-heading">States With Public Openings </div>
   <div class="panel-body">
 
 <?php   
